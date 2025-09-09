@@ -3,12 +3,8 @@ package com.example;
 class MyArrayList<T>{
     private T[] myList;
 
-    public MyArrayList(T[] myList){
-        this.myList = (T[]) new Object[myList.length];
-        System.arraycopy(myList, 0, this.myList, 0, myList.length);
-    }
     public MyArrayList(){
-
+        this.myList = (T[]) new Object[0];
     }
 
     @Override

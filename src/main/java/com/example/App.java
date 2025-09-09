@@ -3,13 +3,8 @@ package com.example;
 public class App 
 {
     private static void testMyArrayList(){
-        System.out.println("Initialize MyArrayList with normal array");
-        Integer[] a = {1,2};
-        MyArrayList<Integer> list = new MyArrayList<>(a);
-        System.out.println( list);
-        System.out.println("Initialize MyArrayList with nothing");
-        list = new MyArrayList<>();
-        System.out.println( list);
+        MyArrayList<Integer> list = new MyArrayList<>();
+        System.out.println(list);
         System.out.println("addint null to the previous MyArrayList variable");
         list.add(null);
         System.out.println(list);
@@ -135,6 +130,13 @@ public class App
         h.put(3, "three");
         System.out.println(h);
         System.out.println(h.size());
+
+        h.put(33, "thirty three");
+        System.out.println(h);
+        System.out.println(h.size());
+
+        System.out.println("Getting key=33");
+        System.out.println(h.get(33));
 
         System.out.println("\nremove");
         h.remove(2);
