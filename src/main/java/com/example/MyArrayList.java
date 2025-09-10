@@ -2,65 +2,63 @@ package com.example;
 
 class MyArrayList<T>{
     private T[] myList;
+    private int capacity = 10;
+    private int size = 0;
 
     public MyArrayList(){
-        this.myList = (T[]) new Object[0];
+        this.myList = (T[]) new Object[capacity];
     }
 
     @Override
     public String toString(){
-        if(myList == null){
-            return "null";
-        }
-        if(myList.length == 0 ){
+        if(size == 0 ){
             return "[ ]";
         }
         String text = "[ " + myList[0];
-        for(int i=1;i<myList.length;i++){
+        for(int i=1;i<size;i++){
             text = text + ", " + myList[i];
         }
         return text + " ]";
     }
 
     public void add(T value){
-        if(myList == null){
-            myList = (T[]) new Object[1];
-            myList[0] = value;
-            return;
+        if(size == capacity){
+            capacity = 2 * capacity;
+            T[] temp = (T[]) new Object[capacity];
+            System.arraycopy(myList, 0, temp, 0, size);
+            myList = temp;
         }
-        T[] temp = (T[]) new Object[myList.length + 1];
-        System.arraycopy(myList, 0, temp, 0, myList.length);
-        temp[myList.length] = value;
-        myList = temp;
+        myList[size] = value;
+        size++;
     }
 
     public void remove(int index){
-        if(index > (myList.length-1) || index < 0){
+        if(index > (size-1) || index < 0){
             throw new IndexOutOfBoundsException();
         }
-        if(myList == null || myList.length == 0){
+        T[] temp = (T[]) new Object[capacity];
+        if(size == 1){
+            myList = temp;
+            size = 0;
             return;
         }
-        if(myList.length == 1){
-            myList = (T[]) new Object[0];
-            return;
-        }
-        T[] temp = (T[]) new Object[myList.length - 1];
         System.arraycopy(myList, 0, temp, 0, index);
-        System.arraycopy(myList, index+1, temp, index, myList.length - index - 1);
+        System.arraycopy(myList, index+1, temp, index, size - index - 1);
         myList = temp;
+        size--;
     }
 
     public void clear(){
-        myList = (T[]) new Object[0];
+        myList = (T[]) new Object[capacity];
+        size = 0;
     }
 
     public int size(){
-        return myList.length;
+        return size;
     }
 
     public T get(int index){
-        if(index > (myList.length-1) || index < 0){
+        if(index > (size-1) || index < 0){
             throw new IndexOutOfBoundsException();
         }
         return myList[index];

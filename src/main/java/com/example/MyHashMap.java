@@ -8,14 +8,14 @@ public class MyHashMap<K, V> {
         V value;
         Node<K, V> next;
 
-        Node(K key, V value, Node next) {
+        Node(K key, V value, Node<K, V> next) {
             this.key = key;
             this.value = value;
             this.next = next;
         }
     }
 
-    private Node[] lists;
+    private Node<K, V>[] lists;
     private int size;
     private static final int CAPACITY = 16;
 
